@@ -18,8 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700;900&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
@@ -57,15 +57,41 @@
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
+                <button id="langSwitch">EN</button>
                 <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+380 96 060 57 02</small>
-                </div>
+                    <small class="fa fa-phone-alt text-primary me-2" aria-hidden="true"></small>
+                    <small>
+                        <a href="tel:+380960605702" aria-label="Phone Call">+380 96 060 57 02</a>
+                    </small>
+                  </div>
+
+
                 <div class="h-100 d-inline-flex align-items-center mx-n2">
-                    <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-square btn-link rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-square btn-outline-light btn-social"
+                       href="https://wa.me/380960605702?text=Hello%2C%20I%20want%20to%20know%20more%20about%20your%20services"
+                       target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a class="btn btn-square btn-outline-light btn-social"
+                       href=""
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="FACEBOOK: ENERGY 2.0 channel">
+                        <i class="fab fa-facebook-f"></i>
+                    <a class="btn btn-square btn-outline-light btn-social"
+                       href="https://www.threads.com/@_energy_2.0?xmt=AQF0FBXXRQcsOE_HDTaLD_RdG_3dUKpBjcjLlMmxliFZQdg"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Threads: ENERGY 2.0 channel">
+                        <i class="fa-brands fa-threads"></i>
+                    </a>
+                    <a class="btn btn-square btn-outline-light btn-social" href="https://t.me/energytwopointzero" target="_blank" rel="noopener noreferrer" aria-label="Telegram: ENERGY 2.0 channel">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                     <a class="btn btn-square btn-outline-light btn-social"
+                       href="https://www.instagram.com/_energy_2.0/?__pwa=1#"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="Instagram: ENERGY 2.0 channel">
+                        <i class="fab fa-instagram"></i>
+                       </a>
                 </div>
             </div>
         </div>
@@ -75,15 +101,18 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+
+        <img src="img/logo.png" alt="Energiya 2.0 Logo" class="logo ms-4">
         <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
-            <h2 class="m-0 text-primary">Energiya 2.0</h2>
+
+            <h2 class="m-0 text-primary" data-key="brand">Energiya 2.0 LLC</h2>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
+                <a href="index.html" class="nav-item nav-link active" data-key="home">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="service.html" class="nav-item nav-link">Service</a>
                 <a href="project.html" class="nav-item nav-link">Project</a>
@@ -767,6 +796,7 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/9de8a01c66.js" crossorigin="anonymous"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
@@ -777,41 +807,54 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+
     <script>
         let currentLang = localStorage.getItem("lang") || "en";
-        let translations = {};
+        const translations = { en: {}, ua: {} };
 
-        // Load JSON translation files
+        // Завантаження перекладів
         async function loadTranslations(lang) {
-            const res = await fetch(`./locales/${lang}.json`);
-            translations[lang] = await res.json();
+            try {
+                const res = await fetch(`./locales/${lang}.json`);
+                translations[lang] = await res.json();
+            } catch (e) {
+                console.error(`Failed to load ${lang} translations:`, e);
+            }
         }
 
-        // Apply translations to all elements with data-key
+        // Застосування перекладів
         function applyTranslations() {
+            const t = translations[currentLang];
+            if (!t) return;
+
             document.querySelectorAll("[data-key]").forEach(el => {
                 const key = el.getAttribute("data-key");
-                el.textContent = translations[currentLang][key] || key;
+                // Змінюємо текст лише якщо переклад існує
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
             });
-            document.getElementById("langSwitch").textContent = currentLang === "en" ? "UA" : "EN";
+
+            document.getElementById("langSwitch").textContent = currentLang === "ua" ? "UA" : "EN";
         }
 
-        // Initialize
+        // Ініціалізація
         async function init() {
-            await loadTranslations("en");
-            await loadTranslations("ua");
+            await Promise.all([loadTranslations("en"), loadTranslations("ua")]);
             applyTranslations();
         }
 
         init();
 
-        // Language switch button
+        // Перемикач мов
         document.getElementById("langSwitch").addEventListener("click", () => {
             currentLang = currentLang === "en" ? "ua" : "en";
             localStorage.setItem("lang", currentLang);
             applyTranslations();
         });
     </script>
+
 </body>
 
 </html>
