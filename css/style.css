@@ -163,6 +163,25 @@
     display: flex;
     align-items: center; /* vertically center text */
 }
+.carousel-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3); /* optional dark overlay */
+    display: flex;
+    align-items: flex-start; /* push to top */
+    justify-content: flex-start;
+    /* adjust this to move text up or down */
+    padding: 14% 5% 0;
+
+}
+
+.carousel-caption h1,
+.carousel-caption p {
+    text-align: left; /* or center if you prefer */
+}
 .owl-carousel-item video {
     width: 100%;
     height: 100%;

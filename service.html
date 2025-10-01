@@ -9,7 +9,9 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.png" rel="icon">
+    <link rel="icon" href="/img/favicon.png?v=2" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png?v=2">
+
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,14 +50,15 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Odesa, Ukraine</small>
+                    <small data-key="location">Odesa, Ukraine</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 19.00</small>
+                    <small data-key="Work hours">Mon - Fri : 09.00 AM - 19.00</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
+                <button id="langSwitch">EN</button>
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
                     <small>+380 96 060 57 02</small>
@@ -124,8 +127,8 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h6 class="text-primary">Our Services</h6>
-                <h1 class="mb-4">We Are Pioneers In The World Of Renewable Energy</h1>
+                <h6 class="text-primary" data-key="Our Services">Our Services</h6>
+                <h1 class="mb-4" data-key="we_are">We are a rapid growing Company int the Area of Solar Energy</h1>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
@@ -135,9 +138,9 @@
                             <div class="service-icon">
                                 <i class="fa fa-solar-panel fa-3x"></i>
                             </div>
-                            <h4 class="mb-3">Solar Panels</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h4 class="mb-3" data-key="Solar Panels" data-key="serv_title_1">Solar Panels</h4>
+                            <p><span data-key="service_1" class="bold-text">Solar Panels Supply, Installation, and Maintenance</span></p>
+                            <a class="small fw-medium" href="" ><span data-key="Read More">Read More</span><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -148,9 +151,9 @@
                             <div class="service-icon">
                                 <i class="fa fa-wind fa-3x"></i>
                             </div>
-                            <h4 class="mb-3">Wind Turbines</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h4 class="mb-3" data-key="serv_title_2">Energy Storage</h4>
+                            <p><span data-key="service_2" class="bold-text">Energy Storage System Design, Installation, and Postdeployment Service. Solar Panels Cleaning and Seasonal Maintenance</span></p>
+                            <a class="small fw-medium" href=""><span data-key="Read More">Read More</span><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -161,9 +164,9 @@
                             <div class="service-icon">
                                 <i class="fa fa-lightbulb fa-3x"></i>
                             </div>
-                            <h4 class="mb-3">Hydropower Plants</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h4 class="mb-3" data-key="serv_title_3">Solar Consulting</h4>
+                            <p><span data-key="service_3" class="bold-text">Renewable Energy Consulting and Advisory. Assessment of businesses and homes for efficiency improvements.</span></p>
+                            <a class="small fw-medium" href=""><span data-key="Read More">Read More</span><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -174,9 +177,9 @@
                             <div class="service-icon">
                                 <i class="fa fa-solar-panel fa-3x"></i>
                             </div>
-                            <h4 class="mb-3">Solar Panels</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h4 class="mb-3" data-key="serv_title_4">Solar Systems Upgrade</h4>
+                            <p><span data-key="service_4" class="bold-text">Existing Solar Panels Installations Upgrade. Residential, commercial, industrial.</span></p>
+                            <a class="small fw-medium" href=""><span data-key="Read More">Read More</span><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -187,9 +190,9 @@
                             <div class="service-icon">
                                 <i class="fa fa-wind fa-3x"></i>
                             </div>
-                            <h4 class="mb-3">Wind Turbines</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h4 class="mb-3" data-key="serv_title_5">Training & Awareness Programs</h4>
+                            <p><span data-key="service_5" class="bold-text">Educate communities on renewable adoption & ROI Analysis. Carbon Footprint Assessment & Reporting </span></p>
+                            <a class="small fw-medium" href=""><span data-key="Read More">Read More</span><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -200,9 +203,9 @@
                             <div class="service-icon">
                                 <i class="fa fa-lightbulb fa-3x"></i>
                             </div>
-                            <h4 class="mb-3">Hydropower Plants</h4>
-                            <p>Stet stet justo dolor sed duo. Ut clita sea sit ipsum diam lorem diam.</p>
-                            <a class="small fw-medium" href="">Read More<i class="fa fa-arrow-right ms-2"></i></a>
+                            <h4 class="mb-3" data-key="serv_title_6">Wind Turbine Energy</h4>
+                            <p><span data-key="service_6" class="bold-text">Feasibility studies, small-scale turbines for farms/communities.</span></p>
+                            <a class="small fw-medium" href=""><span data-key="Read More">Read More</span><i class="fa fa-arrow-right ms-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -425,6 +428,51 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        let currentLang = localStorage.getItem("lang") || "en";
+        const translations = { en: {}, ua: {} };
+
+        // Завантаження перекладів
+        async function loadTranslations(lang) {
+            try {
+                const res = await fetch(`./locales/${lang}.json`);
+                translations[lang] = await res.json();
+            } catch (e) {
+                console.error(`Failed to load ${lang} translations:`, e);
+            }
+        }
+
+        // Застосування перекладів
+        function applyTranslations() {
+            const t = translations[currentLang];
+            if (!t) return;
+
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.getAttribute("data-key");
+                // Змінюємо текст лише якщо переклад існує
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+
+            document.getElementById("langSwitch").textContent = currentLang === "ua" ? "UA" : "EN";
+        }
+
+        // Ініціалізація
+        async function init() {
+            await Promise.all([loadTranslations("en"), loadTranslations("ua")]);
+            applyTranslations();
+        }
+        init();
+
+        // Перемикач мов
+        document.getElementById("langSwitch").addEventListener("click", () => {
+            currentLang = currentLang === "en" ? "ua" : "en";
+            localStorage.setItem("lang", currentLang);
+            applyTranslations();
+        });
+    </script>
 </body>
 
 </html>

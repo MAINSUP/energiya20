@@ -6,7 +6,6 @@
   "location": "Odesa, Ukraine",
   "Work hours": "Mon - Fri : 09.00 - 19.00",
   "brand_descr": "ENERGIYA 2.0 is the Leading Solar Energy Installer in Ukraine",
-  "business_scope_1": "We provide ready to use Solar Energy solutions for your business. Contact us today!",
   "about": "About",
   "service": "Service",
   "project": "Project",
@@ -32,5 +31,14 @@
   "why_us_2": "Free design and quote",
   "why_us_3": "Turnkey project delivery",
   "why_us_4":"Postdelivery maintenance and service",
-  "explore_more": "Explore more"
+  "explore_more": "Explore more",
+  "Our Services": "Our Services",
+  "we_are": "We are a rapid growing Company int the Area of Solar Energy",
+  "serv_title_1": "Solar Panels",
+  "serv_title_2": "Energy Storage",
+  "serv_title_3": "Solar Consulting",
+  "serv_title_4": "Solar Systems Upgrade",
+  "serv_title_5": "Training & Awareness Programs",
+  "serv_title_6": "Wind Turbine Energy"
+
 }

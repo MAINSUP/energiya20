@@ -9,7 +9,8 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.png" rel="icon">
+    <link rel="icon" href="/img/favicon.png?v=2" type="image/png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon.png?v=2">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,14 +49,15 @@
             <div class="col-lg-7 px-5 text-start">
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>Odesa, Ukraine</small>
+                    <small data-key="location">Odesa, Ukraine</small>
                 </div>
                 <div class="h-100 d-inline-flex align-items-center">
                     <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 - 19.00</small>
+                    <small data-key="Work hours">Mon - Fri : 09.00 - 19.00</small>
                 </div>
             </div>
             <div class="col-lg-5 px-5 text-end">
+                <button id="langSwitch">EN</button>
                 <div class="h-100 d-inline-flex align-items-center me-4">
                     <small class="fa fa-phone-alt text-primary me-2"></small>
                     <small>+380 96 060 57 02</small>
@@ -322,6 +324,51 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        let currentLang = localStorage.getItem("lang") || "en";
+        const translations = { en: {}, ua: {} };
+
+        // Завантаження перекладів
+        async function loadTranslations(lang) {
+            try {
+                const res = await fetch(`./locales/${lang}.json`);
+                translations[lang] = await res.json();
+            } catch (e) {
+                console.error(`Failed to load ${lang} translations:`, e);
+            }
+        }
+
+        // Застосування перекладів
+        function applyTranslations() {
+            const t = translations[currentLang];
+            if (!t) return;
+
+            document.querySelectorAll("[data-key]").forEach(el => {
+                const key = el.getAttribute("data-key");
+                // Змінюємо текст лише якщо переклад існує
+                if (t[key]) {
+                    el.textContent = t[key];
+                }
+            });
+
+            document.getElementById("langSwitch").textContent = currentLang === "ua" ? "UA" : "EN";
+        }
+
+        // Ініціалізація
+        async function init() {
+            await Promise.all([loadTranslations("en"), loadTranslations("ua")]);
+            applyTranslations();
+        }
+        init();
+
+        // Перемикач мов
+        document.getElementById("langSwitch").addEventListener("click", () => {
+            currentLang = currentLang === "en" ? "ua" : "en";
+            localStorage.setItem("lang", currentLang);
+            applyTranslations();
+        });
+    </script>
 </body>
 
 </html>
