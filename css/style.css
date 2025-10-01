@@ -174,7 +174,7 @@
     align-items: flex-start; /* push to top */
     justify-content: flex-start;
     /* adjust this to move text up or down */
-    padding: 5% 5% 0;
+    padding: 0% 5% 0;
 
 }
 
