@@ -172,7 +172,7 @@
     background: rgba(200,200,200,0.1);/* optional overlay */
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start; /* push content to left */
     justify-content: flex-start; /* push content to top */
 
@@ -180,10 +180,21 @@
     box-sizing: border-box;
 }
 
+.carousel-caption h1 {
+    font-size: 3rem;      /* adjust as needed */
+    line-height: 1.2;     /* tighter or looser spacing */
+    color: #fff;          /* text color */
+}
 
-.carousel-caption h1,
 .carousel-caption p {
-    text-align: left; /* or center if you prefer */
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 30px;  /* extra spacing before button */
+}
+
+.carousel-caption .btn {
+    padding: 15px 40px;   /* bigger button */
+    font-size: 1rem;
 }
 .carousel-caption .btn {
     margin-top: 110px; /* space above the button */
