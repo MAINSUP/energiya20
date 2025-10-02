@@ -164,24 +164,32 @@
     align-items: center; /* vertically center text */
 }
 .carousel-caption {
-    position: absolute;
+    position: absolute; /* overlay on carousel */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.3); /* optional dark overlay */
-    display: flex;
-    align-items: flex-start; /* push to top */
-    justify-content: flex-start;
-    /* adjust this to move text up or down */
-    padding: 0% 35% 0;
+    background: rgba(200,200,200,0.1);/* optional overlay */
 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* push content to left */
+    justify-content: flex-start; /* push content to top */
+
+    padding: 15% 5%; /* top/bottom 10%, left/right 5% */
+    box-sizing: border-box;
 }
+
 
 .carousel-caption h1,
 .carousel-caption p {
     text-align: left; /* or center if you prefer */
 }
+.carousel-caption .btn {
+    margin-top: 110px; /* space above the button */
+    margin-bottom: 20px; /* optional space below */
+}
+
 .owl-carousel-item video {
     width: 100%;
     height: 100%;
