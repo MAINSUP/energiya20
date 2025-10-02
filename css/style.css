@@ -176,7 +176,7 @@
     align-items: flex-start; /* push content to left */
     justify-content: flex-start; /* push content to top */
 
-    padding: 15% 5%; /* top/bottom 10%, left/right 5% */
+    padding: 20% 5%; /* top/bottom 10%, left/right 5% */
     box-sizing: border-box;
 }
 
