@@ -267,8 +267,8 @@
 .page-header {
     background: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1)), url(../img/header_pic.jpg) center center no-repeat;
     background-size: cover;
-    min-height: 500px;
-    max-height: 620px;
+    min-height: 450px;
+    max-height: 550px;
     min-width: 1000px;
     max-width: 1900px;
 }

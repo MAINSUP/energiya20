@@ -38,7 +38,7 @@
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
+            <span class="sr-only" data-key="Loading">Loading...</span>
         </div>
     </div>
     <!-- Spinner End -->
@@ -60,48 +60,73 @@
             <div class="col-lg-5 px-5 text-end">
                 <button id="langSwitch">EN</button>
                 <div class="h-100 d-inline-flex align-items-center me-4">
-                    <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+380 96 060 57 02</small>
+                    <small class="fa fa-phone-alt text-primary me-2" aria-hidden="true"></small>
+                    <small>
+                        <a href="tel:+380960605702" aria-label="Phone Call">+380 96 060 57 02</a>
+                    </small>
                 </div>
+
+
                 <div class="h-100 d-inline-flex align-items-center mx-n2">
-                    <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-square btn-link rounded-0 border-0 border-end border-secondary" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-square btn-link rounded-0" href=""><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-square btn-outline-light btn-social"
+                       href="https://wa.me/380960605702?text=Hello%2C%20I%20want%20to%20know%20more%20about%20your%20services"
+                       target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a class="btn btn-square btn-outline-light btn-social"
+                       href="https://www.facebook.com/phoenix.solar.ua/about"
+                       target="_blank" rel="noopener noreferrer"
+                       aria-label="FACEBOOK: ENERGY 2.0 channel">
+                        <i class="fab fa-facebook-f"></i>
+                        <a class="btn btn-square btn-outline-light btn-social"
+                           href="https://www.threads.com/@_energy_2.0?xmt=AQF0FBXXRQcsOE_HDTaLD_RdG_3dUKpBjcjLlMmxliFZQdg"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Threads: ENERGY 2.0 channel">
+                            <i class="fa-brands fa-threads"></i>
+                    </a>
+                    <a class="btn btn-square btn-outline-light btn-social" href="https://t.me/energytwopointzero" target="_blank" rel="noopener noreferrer" aria-label="Telegram: ENERGY 2.0 channel">
+                            <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <a class="btn btn-square btn-outline-light btn-social"
+                           href="https://www.instagram.com/_energy_2.0/?__pwa=1#"
+                           target="_blank" rel="noopener noreferrer"
+                           aria-label="Instagram: ENERGY 2.0 channel">
+                            <i class="fab fa-instagram"></i>
+                    </a>
+                   </div>
                 </div>
             </div>
         </div>
-    </div>
+
     <!-- Topbar End -->
 
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
         <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
-            <h2 class="m-0 text-primary">Energiya 2.0</h2>
+            <h2 class="m-0 text-primary" data-key="brand">ENERGIYA 2.0 LLC</h2>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="about.html" class="nav-item nav-link active">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <a href="project.html" class="nav-item nav-link">Project</a>
+                <a href="index.html" class="nav-item nav-link active" data-key="home">Home</a>
+                <a href="about.html" class="nav-item nav-link" data-key="about">About</a>
+                <a href="service.html" class="nav-item nav-link" data-key="service">Service</a>
+                <a href="project.html" class="nav-item nav-link" data-key="project">Project</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-key="pages">Pages</a>
                     <div class="dropdown-menu bg-light m-0">
-                        <a href="feature.html" class="dropdown-item">Feature</a>
-                        <a href="quote.html" class="dropdown-item">Free Quote</a>
-                        <a href="team.html" class="dropdown-item">Our Team</a>
-                        <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-
+                        <a href="feature.html" class="dropdown-item" data-key="feature">Feature</a>
+                        <a href="quote.html" class="dropdown-item" data-key="free_quote">Free Quote</a>
+                        <a href="team.html" class="dropdown-item" data-key="our_team">Our Team</a>
+                        <a href="testimonial.html" class="dropdown-item" data-key="testimonial">Testimonial</a>
                     </div>
                 </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="contact.html" class="nav-item nav-link" data-key="contact">Contact</a>
             </div>
-            <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
+            <a href="quote.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" data-key="Get A Quote">Get A Quote<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
     <!-- Navbar End -->
@@ -123,7 +148,7 @@
     <!-- Page Header End -->
 
     <!-- MAP -->
-    <div id="map" style="height:500px;"></div>
+    <div id="map" style="height:600px;"></div>
 
     <div class="timeline-container">
         <div id="stats" class="timeline-stats"></div> <!-- Stats above slider -->
@@ -148,7 +173,7 @@
                         <div class="btn-lg-square bg-primary rounded-circle me-3">
                             <i class="fa fa-users text-white"></i>
                         </div>
-                        <h1 class="mb-0" data-toggle="counter-up">34</h1>
+                        <h1 class="mb-0" data-toggle="counter-up">27</h1>
                     </div>
                     <h5 class="mb-3" data-key="Happy Customers">Happy Customers</h5>
                     <span data-key="under_spinner" class="bold-text">Join our success story</span>
@@ -158,7 +183,7 @@
                         <div class="btn-lg-square bg-primary rounded-circle me-3">
                             <i class="fa fa-check text-white"></i>
                         </div>
-                        <h1 class="mb-0" data-toggle="counter-up">44</h1>
+                        <h1 class="mb-0" data-toggle="counter-up">31</h1>
                     </div>
                     <h5 class="mb-3" data-key="Project Done">Projects Done</h5>
                     <span data-key="under_spinner" class="bold-text">Join our success story</span>
@@ -170,7 +195,7 @@
                         </div>
                         <h1 class="mb-0" data-toggle="counter-up">506</h1>
                     </div>
-                    <h5 class="mb-3" data-key="Awards Win">Constructed kWt</h5>
+                    <h5 class="mb-3" data-key="Awards Win">Built kWt</h5>
                     <span data-key="under_spinner" class="bold-text">Join our success story</span>
                 </div>
                 <div class="col-md-6 col-lg-3 wow fadeIn" data-wow-delay="0.7s">
@@ -178,7 +203,7 @@
                         <div class="btn-lg-square bg-primary rounded-circle me-3">
                             <i class="fa fa-users-cog text-white"></i>
                         </div>
-                        <h1 class="mb-0" data-toggle="counter-up">15</h1>
+                        <h1 class="mb-0" data-toggle="counter-up">11</h1>
                     </div>
                     <h5 class="mb-3" data-key="Expert Workers">Expert Workers</h5>
                     <span data-key="under_spinner" class="bold-text">Join our success story</span>
