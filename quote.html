@@ -263,6 +263,36 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js?v=@@VERSION@@"></script>
+
+    <script>
+        document.getElementById("quoteForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // stop normal form submit
+
+            let form = e.target;
+            let formData = new FormData(form);
+            let messageBox = document.getElementById("formMessage");
+
+            fetch("/php/quote.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.text())
+                .then(data => {
+                    messageBox.innerHTML = data;
+                    messageBox.style.color = data.includes("✅") ? "green" : "red";
+
+                    if (data.includes("✅")) {
+                        form.reset(); // clear form if success
+                    }
+                })
+                .catch(err => {
+                    messageBox.innerHTML = "❌ Error submitting form. Please try again.";
+                    messageBox.style.color = "red";
+                });
+        });
+    </script>
+
+
     <script>
         let currentLang = localStorage.getItem("lang") || "en";
         const translations = { en: {}, ua: {} };
