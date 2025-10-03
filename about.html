@@ -122,6 +122,22 @@
     </div>
     <!-- Page Header End -->
 
+    <!-- MAP -->
+    <div id="map" style="height:500px;"></div>
+
+    <div class="timeline-container">
+        <div id="stats" class="timeline-stats"></div> <!-- Stats above slider -->
+
+        <div class="slider-wrapper">
+            <input type="range" id="monthSlider" min="0" max="1" value="0" class="timeline-slider">
+            <div class="timeline-dots"></div> <!-- Dots overlay -->
+        </div>
+
+        <div id="monthLabel" class="timeline-label"></div>
+    </div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- MAP -->
 
     <!-- Feature Start -->
     <div class="container-xxl py-5">
@@ -177,9 +193,9 @@
     <div class="container-fluid bg-light overflow-  hidden my-5 px-lg-0">
         <div class="container about px-lg-0">
             <div class="row g-0 mx-lg-0">
-                <div class="col-lg-6 ps-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="col-lg-6 ps-lg-0 wow fadeIn" data-wow-delay="0.1s" style="min-height: 250px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute img-fluid w-100 h-100" src="img/hat_zoom.jpg" style="object-fit: cover;" alt="">
+                        <img class="position-absolute img-fluid w-100 h-100" src="img/hat_zoom.jpg?v2" style="object-fit: contain;" alt="hat">
                     </div>
                 </div>
                 <div class="col-lg-6 about-text py-5 wow fadeIn" data-wow-delay="0.5s">
@@ -198,7 +214,6 @@
         </div>
     </div>
     <!-- About End -->
-
 
     <!-- Team Start -->
     <div class="container-xxl py-5">
@@ -354,6 +369,125 @@
     <script src="js/main.js?v=@@VERSION@@"></script>
 
     <script>
+        const sheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRKGVluODswcp5XyTmKj4LYhTb8M65DrbWOTZVZHsBAYpl0AcX4lGmr16_4l4A02iHMPwgCyyGbtoLM/pub?output=csv";
+
+        var map = L.map('map').setView([20,0],2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        var markers = [];
+        var allLeads = [];
+        var monthsAvailable = [];
+
+        const slider = document.getElementById("monthSlider");
+        const label = document.getElementById("monthLabel");
+
+        const monthNames = ["January","February","March","April","May","June",
+            "July","August","September","October","November","December"];
+
+        // --- Custom Icons ---
+        const icons = {
+            pending: L.icon({ iconUrl: "/img/sun-clock.png", iconSize: [30,30], iconAnchor:[15,30], popupAnchor:[0,-28] }),
+            progress: L.icon({ iconUrl: "/img/maintenance.png", iconSize: [30,30], iconAnchor:[15,30], popupAnchor:[0,-28] }),
+            solar: L.icon({ iconUrl: "/img/solar-power.png", iconSize: [30,30], iconAnchor:[15,30], popupAnchor:[0,-28] }),
+            storage: L.icon({ iconUrl: "/img/solar-energy.png", iconSize: [30,30], iconAnchor:[15,30], popupAnchor:[0,-28] }),
+            wind: L.icon({ iconUrl: "/img/wind-power.png", iconSize: [30,30], iconAnchor:[15,30], popupAnchor:[0,-28] })
+        };
+
+        // --- Load CSV ---
+        fetch(sheetUrl)
+            .then(res => res.text())
+            .then(csv => {
+                let rows = csv.trim().split("\n").map(r => r.split(","));
+                rows.slice(1).forEach(r => {
+                    if (r.length < 6) return;
+                    let lat = parseFloat(r[1]);
+                    let lon = parseFloat(r[2]);
+                    if (isNaN(lat) || isNaN(lon)) return;
+                    allLeads.push({
+                        name: r[0].trim(),
+                        lat: lat,
+                        lon: lon,
+                        date: r[3].trim(),  // YYYY-MM
+                        status: r[4].trim(),
+                        type: r[5].trim(),
+                        kwt: r[6] ? r[6].trim() : ""
+                    });
+                });
+
+                // Build sorted unique months
+                monthsAvailable = [...new Set(allLeads.map(l => l.date))].sort();
+                 // After loading monthsAvailable
+                const dotsContainer = document.querySelector(".timeline-dots");
+                dotsContainer.innerHTML = monthsAvailable.map(() => '<span></span>').join('');
+                slider.min = 0;
+                slider.max = monthsAvailable.length - 1;
+
+                // Current month
+                let today = new Date();
+                let todayStr = today.getFullYear() + "-" + String(today.getMonth()+1).padStart(2,"0");
+                let startIndex = monthsAvailable.indexOf(todayStr);
+                if (startIndex === -1) startIndex = monthsAvailable.length - 1;
+
+                slider.value = startIndex;
+                updateLabel(startIndex);
+                updateMap(monthsAvailable[startIndex]);
+            });
+
+        // --- Update Map ---
+        function updateMap(monthStr) {
+            markers.forEach(m => map.removeLayer(m));
+            markers = [];
+
+            let filtered = allLeads.filter(l => l.date <= monthStr);
+
+            filtered.forEach(lead => {
+                let icon;
+                if (lead.status.toLowerCase() === "pending") icon = icons.pending;
+                else if (lead.status.toLowerCase() === "in progress") icon = icons.progress;
+                else if (lead.status.toLowerCase() === "completed") {
+                    if (lead.type.toLowerCase() === "solar") icon = icons.solar;
+                    else if (lead.type.toLowerCase() === "storage") icon = icons.storage;
+                    else if (lead.type.toLowerCase() === "wind") icon = icons.wind;
+                }
+
+                let marker = L.marker([lead.lat, lead.lon], { icon: icon })
+                    .bindPopup(`<b>${lead.name}</b><br>Status: ${lead.status}<br>Type: ${lead.type}<br>kWt: ${lead.kwt}<br>Date: ${lead.date}`);
+                marker.addTo(map);
+                markers.push(marker);
+            });
+
+            if (markers.length > 0) {
+                let group = L.featureGroup(markers);
+                map.fitBounds(group.getBounds().pad(0.2));
+            }
+
+            let completed = filtered.filter(l => l.status.toLowerCase() === "completed").length;
+            let pending = filtered.filter(l => l.status.toLowerCase() === "pending").length;
+            let progress = filtered.filter(l => l.status.toLowerCase() === "in progress").length;
+
+            document.getElementById("stats").innerHTML =
+                `Leads Shown: ${filtered.length} | Completed: ${completed} | In Progress: ${progress} | Pending: ${pending}`;
+        }
+
+        // --- Slider listener ---
+        slider.addEventListener("input", () => {
+            let idx = parseInt(slider.value);
+            updateLabel(idx);
+            updateMap(monthsAvailable[idx]);
+        });
+
+        // --- Update label ---
+        function updateLabel(idx) {
+            let [year, month] = monthsAvailable[idx].split("-");
+            label.innerText = monthNames[parseInt(month)-1] + " " + year;
+        }
+    </script>
+
+
+
+    <script>
         let currentLang = localStorage.getItem("lang") || "en";
         const translations = { en: {}, ua: {} };
 
@@ -397,6 +531,7 @@
             applyTranslations();
         });
     </script>
+    <a href="https://www.flaticon.com/free-icons/solar" title="solar icons">Solar icons created by bsd - Flaticon</a>
 </body>
 
 </html>
