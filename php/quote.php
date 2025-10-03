@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($service)) $errors[] = "Please select a service";
 
     if (empty($errors)) {
-        $to = "yourmail@example.com";  // change to your email
+        $to = "vmail@energiya20.com";  // change to your email
         $subject = "New Quote Request - " . ucfirst($service);
         $body = "Name: $name\nEmail: $email\nMobile: $mobile\nService: $service\nNote:\n$note";
 
