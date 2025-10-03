@@ -504,7 +504,7 @@
             let formData = new FormData(form);
             let messageBox = document.getElementById("formMessage");
 
-            fetch("quote.php", {
+            fetch("/php/quote.php", {
                 method: "POST",
                 body: formData
             })
