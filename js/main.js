@@ -97,3 +97,26 @@
     
 })(jQuery);
 
+// ChatBot script
+
+let sessionId = localStorage.getItem("sessionId");
+if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem("sessionId", sessionId);
+}
+
+async function sendMessage() {
+    const input = document.getElementById("chatInput");
+    const message = input.value;
+    input.value = "";
+    document.getElementById("chatBox").innerHTML += `<p><b>You:</b> ${message}</p>`;
+
+    const res = await fetch("/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ session_id: sessionId, message })
+    });
+    const data = await res.json();
+    document.getElementById("chatBox").innerHTML += `<p><b>Assistant:</b> ${data.answer}</p>`;
+    document.getElementById("chatBox").scrollTop = document.getElementById("chatBox").scrollHeight;
+}
