@@ -120,3 +120,11 @@ async function sendMessage() {
     document.getElementById("chatBox").innerHTML += `<p><b>Assistant:</b> ${data.answer}</p>`;
     document.getElementById("chatBox").scrollTop = document.getElementById("chatBox").scrollHeight;
 }
+
+//FAST API
+
+await fetch("https://your-python-backend.com/lead", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(leadData)
+});
