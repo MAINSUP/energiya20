@@ -50,9 +50,11 @@
     // Header carousel
     $(".header-carousel").owlCarousel({
         autoplay: true,
-        smartSpeed: 1200,
+        autoplayTimeout: 7000, // 7 seconds per slide
+        autoplaySpeed: 3200,   // 1.2 seconds transition
+        smartSpeed: 1200,      // alternative speed setting
         loop: true,
-        nav: false,
+        nav: true,
         dots: true,
         items: 1,
         dotsData: true,
