@@ -422,24 +422,35 @@
             wind: L.icon({ iconUrl: "/img/wind-power.png", iconSize: [30,30], iconAnchor:[15,30], popupAnchor:[0,-28] })
         };
 
+        // fetch("/api/leads") // normal visitors
+        // fetch("/api/leads?key=admin123") // for admin view
+       // .then(res => res.json())
+       //     .then(data => {
+         //       allLeads = data;
+        //        monthsAvailable = [...new Set(allLeads.map(l => l.date))].sort();
+                // rest of your initialization logic...
+         //   });
+
+
+
         // --- Load CSV ---
         fetch(sheetUrl)
             .then(res => res.text())
             .then(csv => {
                 let rows = csv.trim().split("\n").map(r => r.split(","));
                 rows.slice(1).forEach(r => {
-                    if (r.length < 6) return;
-                    let lat = parseFloat(r[1]);
-                    let lon = parseFloat(r[2]);
+                    if (r.length < 11) return;
+                    let lat = parseFloat(r[5]);
+                    let lon = parseFloat(r[6]);
                     if (isNaN(lat) || isNaN(lon)) return;
                     allLeads.push({
-                        name: r[0].trim(),
+                        property: r[4].trim(),
                         lat: lat,
                         lon: lon,
-                        date: r[3].trim(),  // YYYY-MM
-                        status: r[4].trim(),
-                        type: r[5].trim(),
-                        kwt: r[6] ? r[6].trim() : ""
+                        date: r[7].trim(),  // YYYY-MM
+                        status: r[8].trim(),
+                        type: r[9].trim(),
+                        kwt: r[10] ? r[10].trim() : ""
                     });
                 });
 
@@ -467,7 +478,11 @@
             markers.forEach(m => map.removeLayer(m));
             markers = [];
 
-            let filtered = allLeads.filter(l => l.date <= monthStr);
+            let excludedStatuses = ["rfq", "lost", "claim"];
+            let filtered = allLeads.filter(l =>
+                l.date <= monthStr && !excludedStatuses.includes(l.status.toLowerCase())
+            );
+
 
             filtered.forEach(lead => {
                 let icon;
@@ -480,7 +495,7 @@
                 }
 
                 let marker = L.marker([lead.lat, lead.lon], { icon: icon })
-                    .bindPopup(`<b>${lead.name}</b><br>Status: ${lead.status}<br>Type: ${lead.type}<br>kWt: ${lead.kwt}<br>Date: ${lead.date}`);
+                    .bindPopup(`<b>${lead.property}</b><br>Status: ${lead.status}<br>Type: ${lead.type}<br>kWt: ${lead.kwt}<br>Date: ${lead.date}`);
                 marker.addTo(map);
                 markers.push(marker);
             });

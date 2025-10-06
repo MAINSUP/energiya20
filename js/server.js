@@ -16,8 +16,8 @@ const openai = new OpenAIApi(configuration);
 // --- Database config ---
 const dbConfig = {
     host: "localhost",
-    user: "your_user",
-    password: "your_password",
+    user: "crm",
+    password: "vd12kgum20",
     database: "leads_db",
 };
 

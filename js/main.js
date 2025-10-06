@@ -123,8 +123,8 @@ async function sendMessage() {
 
 //FAST API
 
-await fetch("https://your-python-backend.com/lead", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(leadData)
-});
+//await fetch("https://your-python-backend.com/lead", {
+//    method: "POST",
+//    headers: { "Content-Type": "application/json" },
+ //   body: JSON.stringify(leadData)
+//});
